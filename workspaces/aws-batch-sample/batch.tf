@@ -21,3 +21,14 @@ resource "aws_batch_job_queue" "test_queue" {
     aws_batch_compute_environment.fargate_sample.arn,
   ]
 }
+
+resource "aws_batch_job_definition" "test" {
+  name                  = "tf_test_batch_job_definition"
+  type                  = "container"
+  platform_capabilities = ["FARGATE"]
+
+  container_properties = templatefile(
+    "${path.module}/templates/job_definition.json.tpl",
+    { execution_role_arn = aws_iam_role.ecs_task_execution_role.arn }
+  )
+}
