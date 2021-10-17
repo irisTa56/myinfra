@@ -32,3 +32,9 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# For setting your environment variables
+.envrc
+
+# For configuring your terraform backend
+backend.hcl

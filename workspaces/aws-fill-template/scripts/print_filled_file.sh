@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -eu
+set -euo pipefail
 
 terraform apply -refresh-only
 terraform_command="nonsensitive(local.$1)"

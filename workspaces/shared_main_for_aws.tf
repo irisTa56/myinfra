@@ -1,10 +1,7 @@
 terraform {
   required_version = "~> 1.0"
 
-  backend "remote" {
-    organization = "irisTa56"
-    hostname     = "app.terraform.io"
-  }
+  backend "remote" {}
 
   required_providers {
     aws = {
@@ -14,7 +11,15 @@ terraform {
   }
 }
 
+variable "profile_for_aws_provider" {
+  type = string
+}
+
+variable "region_for_aws_provider" {
+  type = string
+}
+
 provider "aws" {
-  profile = "my-aws"
-  region  = "ap-northeast-1"
+  profile = var.profile_for_aws_provider
+  region  = var.region_for_aws_provider
 }
