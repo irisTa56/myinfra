@@ -12,3 +12,12 @@ resource "aws_batch_compute_environment" "fargate_sample" {
   type         = "MANAGED"
   depends_on   = [aws_iam_role_policy_attachment.aws_batch_service_role]
 }
+
+resource "aws_batch_job_queue" "test_queue" {
+  name     = "tf-test-batch-job-queue"
+  state    = "ENABLED"
+  priority = 1
+  compute_environments = [
+    aws_batch_compute_environment.fargate_sample.arn,
+  ]
+}
