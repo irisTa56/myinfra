@@ -32,3 +32,14 @@ resource "aws_batch_job_definition" "test" {
     { execution_role_arn = aws_iam_role.ecs_task_execution_role.arn }
   )
 }
+
+resource "aws_batch_job_definition" "five_minutes_sleeper" {
+  name                  = "five_minutes_sleeper"
+  type                  = "container"
+  platform_capabilities = ["FARGATE"]
+
+  container_properties = templatefile(
+    "${path.module}/templates/five_minutes_sleeper.json.tpl",
+    { execution_role_arn = aws_iam_role.ecs_task_execution_role.arn }
+  )
+}
